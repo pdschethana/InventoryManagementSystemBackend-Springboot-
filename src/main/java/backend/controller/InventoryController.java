@@ -307,6 +307,30 @@ public class InventoryController {
             return inventoryRepository.save(existingInventory);
         }).orElseThrow(() -> new InventoryNotFoundException(id));
     }
+    // Delete part
+    @DeleteMapping("/inventory/{id}")
+    String deleteItem(@PathVariable Long id){
+        // check item is exist in db
+        InventoryModel inventoryItem = inventoryRepository.findById(id)
+                .orElseThrow(()-> new InventoryNotFoundException(id));
+        // img delete part
+        String itemImage=inventoryItem.getItemImage();
+        if (itemImage!= null && !itemImage.isEmpty()){
+            File imageFile=new File("src/main/uploads" +itemImage);
+            if(imageFile.exists()){
+                if(imageFile.delete()){
+                    System.out.println("Image deleted");
+                } else{
+                    System.out.println("Failed to delete image");
+                }
+            }
+
+        }
+        // Delete item from the repo
+        inventoryRepository.deleteById(id);
+        return "data with id" +id+ "and image deleted";
+    }
+
 }
 
 
