@@ -1,9 +1,11 @@
 package backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
 
 @Entity
 public class InventoryModel {
@@ -50,6 +52,8 @@ public class InventoryModel {
     public String getItemName() {
         return itemName;
     }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;}
 
 
     public void setItemId(String itemId) {
