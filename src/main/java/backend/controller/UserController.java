@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -63,6 +64,18 @@ public class UserController {
                     .body(Map.of("message", "Invalid credentials")); // ✅ failure case
         }
     }
+    // Display
+    @GetMapping
+    List<UserModel>getAllUsers(){
+        return userRepository.findAll();
+    }
+    @GetMapping("/user/{id}")
+    UserModel getUserId(@PathVariable Long id){
+        return userRepository.findById(id)
+                .orElseThrow(()->new UserNotFoundException(id));
+    }
+
+
 }
 
 
