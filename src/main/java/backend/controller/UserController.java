@@ -88,7 +88,15 @@ public class UserController {
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
-
+// delete
+   @DeleteMapping("/user/{id}")
+    String deleteProfile(@PathVariable Long id){
+        if(! userRepository.existsById(id)){
+            throw new InventoryNotFoundException(id);
+        }
+        userRepository.deleteById(id);
+        return "user account" +id+ "deleted";
+    }
 
 
 }
