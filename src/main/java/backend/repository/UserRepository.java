@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserModel,Long> {
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 
-    @Override
+    // Custom finder method (no @Override here!)
     Optional<UserModel> findByEmail(String email);
+    boolean existByEmail (String email);
 }*/
+
 
 package backend.repository;
 
@@ -19,8 +21,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserModel, Long> {
-
-    // Custom finder method (no @Override here!)
     Optional<UserModel> findByEmail(String email);
+    boolean existsByEmail(String email); // ✅ correct name
 }
+
+
 
